@@ -1,0 +1,22 @@
+# Configurable parking-classification thresholds (tune on validation set)
+# Initial engineering values from project requirements — not universal truths.
+
+# Tuned on validation (see outputs/tuning/threshold_search.json). Test set unused.
+vehicle_inside_min: 0.85          # min R_vehicle for CORRECT PARKING
+outside_max: 0.10                 # max R_outside for CORRECT PARKING
+slot_assign_min: 0.30             # min R_vehicle to assign car to a slot
+minimum_second_slot_intrusion_ratio: 0.15  # fraction of vehicle footprint beyond boundary tolerance
+boundary_crossing_tolerance: 0.05 # ignore intrusion within 5% of the vehicle's short dimension
+slot_coverage_occupied_min: 0.30  # min R_slot for physical occupancy
+usable_free_max_intrusion: 0.05   # max intrusion for usable availability
+
+# Keep weak vehicle detections visible as uncertain instead of dropping them.
+vehicle_detection_conf_min: 0.10
+vehicle_conf_min: 0.25
+slot_conf_min: 0.25
+uncertain_conf_max: 0.40          # below this (but above conf_min): UNCERTAIN
+nms_iou: 0.45
+
+# Temporal smoothing (video)
+temporal_window: 5
+temporal_majority: 0.6
